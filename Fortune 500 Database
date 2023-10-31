@@ -1,0 +1,34 @@
+SELECT *
+FROM fortune_companies
+
+Assign all the companies in the Healthcare industry as "mother friendly workplace", "acceptable", or "Not Mother Friendly" based on the maternity leave offered. 
+SELECT company_name,
+CASE WHEN maternity_leave_weeks >= 10 THEN "mother friendly workplace"
+WHEN maternity_leave_weeks >= 8 THEN "acceptable"
+ELSE "Not Mother Friendly"
+END AS mother_friendliness
+FROM fortune_companies
+WHERE industry="Healthcare"
+
+Which industries have an average revenue of at least $100 Billion?
+SELECT industry, ROUND(AVG(revenue)) as avg_revenue_billions
+FROM fortune_companies
+GROUP BY industry
+HAVING avg_revenue_billions>=100
+
+Which companies have healthcare benefits *and* at least 15 paid time off days?
+SELECT company_name
+FROM fortune_companies
+WHERE paid_time_off_days>=15
+AND healthcare_benefits=1
+
+Which companies have employee tenure of less than 2 years or no health benefits?
+SELECT company_name
+FROM fortune_companies
+WHERE avg_employee_tenure<2
+OR healthcare_benefits=0
+
+What is the total revenue for all industries? What is the lowest revenue for all industries? What is the highest?
+SELECT SUM(revenue), MAX(revenue), MIN(revenue) 
+FROM fortune_companies
+ORDER BY industry desc;
