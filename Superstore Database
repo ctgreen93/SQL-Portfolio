@@ -31,15 +31,15 @@ FROM superstore
 ORDER BY price desc;
 
 Show a statistic about the item prices
-SELECT AVG(price)
+SELECT MIN(price), item_name
 FROM superstore;
 
 Show a statistic about the price for items in the category of "Kitchen Supplies"
-SELECT AVG(price)
+SELECT MAX(price), item_name
 FROM superstore
-WHERE category="Kitchen Supplies"
+WHERE category="Kitchen Supplies";
 
-Show a statistic about the items in the category "Robot Vacuum Cleaner"
-SELECT COUNT(stock_quantity)
+Show a statistic about the items in the category "Cozy Throw Blanket"
+SELECT SUM(stock_quantity), item_name
 FROM superstore
-WHERE category="Robot Vacuum Cleaner"
+WHERE category="Cozy Throw Blanket";
